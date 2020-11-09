@@ -8,14 +8,12 @@ maintainer := "Galudisu <galudisu@gmail.com>"
 scalaVersion in ThisBuild := "2.12.8"
 
 // dependencies versions
-lazy val log4jVersion        = "2.7"
-lazy val scalaLoggingVersion = "3.7.2"
-lazy val catsVersion         = "2.2.0"
-lazy val slf4jVersion        = "1.7.25"
-lazy val scalaSwingVersion   = "2.1.1"
-lazy val specsVersion        = "4.10.5"
-lazy val scalatestVersion    = "3.0.4"
-lazy val scalacheckVersion   = "1.14.3"
+lazy val finchVersion      = "0.31.0"
+lazy val circeVersion      = "0.13.0"
+lazy val fasterxmlVersion  = "2.9.10"
+lazy val specsVersion      = "4.10.5"
+lazy val scalatestVersion  = "3.0.4"
+lazy val scalacheckVersion = "1.14.3"
 
 // make version compatible with docker for publishing
 ThisBuild / dynverSeparator := "-"
@@ -52,16 +50,14 @@ mainClass in (Compile, run) := Some("info.galudisu.Main")
 
 libraryDependencies ++= {
   Seq(
-    "org.apache.logging.log4j"   % "log4j-core"       % log4jVersion,
-    "org.apache.logging.log4j"   % "log4j-api"        % log4jVersion,
-    "org.apache.logging.log4j"   % "log4j-slf4j-impl" % log4jVersion,
-    "com.typesafe.scala-logging" %% "scala-logging"   % scalaLoggingVersion,
-    // cats
-    "org.typelevel" %% "cats-core" % catsVersion,
-    "org.typelevel" %% "cats-laws" % catsVersion,
-    "org.typelevel" %% "cats-free" % catsVersion,
-    // ui design
-    "org.scala-lang.modules" %% "scala-swing" % scalaSwingVersion,
+    // finch
+    "com.github.finagle" %% "finch-core"  % finchVersion,
+    "com.github.finagle" %% "finch-circe" % finchVersion,
+    // fasterxml
+    "com.fasterxml.jackson.core" % "jackson-core"     % fasterxmlVersion,
+    "com.fasterxml.jackson.core" % "jackson-databind" % fasterxmlVersion,
+    // cire
+    "io.circe" %% "circe-generic" % circeVersion,
     // test
     "org.specs2"     %% "specs2-core"       % specsVersion      % Test,
     "org.specs2"     %% "specs2-mock"       % specsVersion      % Test,
